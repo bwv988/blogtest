@@ -107,6 +107,21 @@
     margin-left: 0;
 }
 
+.col_left {
+	float:left;
+	width:50%;
+}
+
+.col_right {
+	float:right;
+}
+
+.col_right,
+.col_left {
+	font-size: 13px;
+	margin-top: 10px;
+}
+
 .footer-col-wrapper {
     font-size: 15px;
     color: $grey-color;

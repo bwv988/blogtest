@@ -1,6 +1,7 @@
 ---
 title: Accessing Apache Drill from R
 categories: [bigdata, r]
+featured: true
 layout: post
 ---
 

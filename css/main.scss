@@ -1,5 +1,5 @@
 ---
-# Only the main Sass file needs front matter (the dashes are enough)
+# Main SASS file.
 ---
 @charset "utf-8";
 
@@ -19,7 +19,7 @@ $brand-color:      #2a7ae2;
 $main-color:       #12C271;
 
 $red-color-dark:   #E20000;
-
+$green-color-light: rgb(5, 165, 13);
 $grey-color:       #828282;
 $grey-color-light: lighten($grey-color, 40%);
 $grey-color-dark:  darken($grey-color, 25%);
@@ -74,19 +74,8 @@ $on-laptop:        800px;
   margin-left: 10px;
 }
 
-.related_left {
-	float:left;
-	width:45%;
-}
-
-.related_right {
-	float:right;
-}
-
-.view_comments_link {
-	font-size:12px;
-	text-align:right;
-	margin-top:10px;
+.featured_post {
+        color: $green-color-light;
 }
 
 
@@ -113,14 +102,15 @@ ul.posts span {
 	font-size: 80%;
 }
 
-.view_comments_link {
-	font-size:12px;
-	text-align:right;
-	margin-top:10px;
-}
-
 hr {
   margin-bottom: 20px;
+}
+
+.footer_description {
+    color: $red-color-dark;
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+    font-weight: bold;
 }
 
 @media screen and (min-width: 0px) and (max-width: 900px) {
