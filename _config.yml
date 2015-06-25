@@ -1,11 +1,11 @@
 # Site settings
 title: warpbreaks.io
 email: ralph.schlosser@gmail.com
-description: )---> Data, Code and Stuff <---(
+description: Data, Code and Stuff
 baseurl: ""
 url: "http://www.warpbreaks.io"
 #twitter_username: anildigital
 github_username:  bwv988
-
+copyright: Copyright &copy; Ralph Schlosser.
 # Build settings
 markdown: kramdown
