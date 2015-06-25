@@ -4,17 +4,17 @@ categories: [bigdata, r]
 layout: post
 ---
 
-Over the last decade, the [R](http://www.r-project.org/) programming language has gained a lot of traction outside of its core user base which originates in quantitative research and academia.
+Over the last decade, the [R](http://www.r-project.org/) programming language has gained a lot of traction outside of its core user base which mainly emerged from academia and quantitative research in the private sector.
 
-The **RedMonk Programming Language survey** -- a survey which aims at analyzing the use of various programming languages by looking at their popularity in GitHub and Stackoverflow -- has recently ranked R in the top quantile in terms of user popularity (see January 2015 [RedMonk ranking](https://redmonk.com/sogrady/2015/01/14/language-rankings-1-15/)).
+The **RedMonk Programming Language survey** -- a survey which aims at analyzing the use of various programming languages by looking at their respective popularity on **GitHub** and **Stackoverflow** -- has recently ranked R in the top quantile in terms of user popularity (see January 2015 [RedMonk ranking](https://redmonk.com/sogrady/2015/01/14/language-rankings-1-15/)).
 
-To frequent users of R this is no real surprise, and it is clear that the popularity of R can largely be attributed to its powerful syntax, built-in support of modern programming paradigms (such as _lambda_ functions or inherent vectorized computations), and its flexibility that supports both quick exploratory analyses as well as complex machine learning algorithms.
+While there are many reasons behind this wider trend, to frequent users of R it does not come as a big surprise; indeed it is quite clear to them that the popularity of R can largely be attributed to its powerful yet simple syntax, built-in support of modern programming paradigms since R's inception (such as _lambda_ functions or inherently vectorized computations), and its versatility that supports both quick exploratory analyses as well as complex machine learning algorithms.
 
-However one major disadvantage that standard R suffers from is that computations are limited to data sets that can fit into main memory.
+However one major disadvantage that standard R has been suffering from is that computations are limited to data sets that can fit into main memory.
 
-There are now alternative offerings of R ([Microsoft Azure](http://azure.microsoft.com/en-us/), [Revolution R](http://www.revolutionanalytics.com/)) which alleviate the above problem somewhat, but I thought it would be cool :) to try if standard R can be paired with a trending Big Data Query engine, **Apache Drill**, to open up entirely new paths of data access and pre-processing to R.
+There are now alternative offerings of R ([Microsoft Azure](http://azure.microsoft.com/en-us/), [Revolution R](http://www.revolutionanalytics.com/)) which alleviate the above problem somewhat, but I thought it would be cool to try if standard R can be paired with a trending and buzz-word laden piece of software: The Big Data query engine **Apache Drill**. The idea was that this could potentially open up entirely new paths of data access and pre-processing to R.
 
-Although I could not complete my investigation due to other commitments, I did at least manage to connect to Drill and run queries, the data of which is then further processed in R.
+Although I could not complete my investigation due to other commitments, I did at least manage to connect to Drill and run basic queries, the data of which is then further processed in R.
 
 Find the code here:
 

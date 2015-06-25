@@ -1,10 +1,10 @@
 # Site settings
-title: warpbreaks
+title: warpbreaks.io
 email: ralph.schlosser@gmail.com
 description: >
   Data and Code
-baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://www.warpbreaks.io" # the base hostname & protocol for your site
+baseurl: ""
+url: "http://www.warpbreaks.io"
 #twitter_username: anildigital
 github_username:  bwv988
 
