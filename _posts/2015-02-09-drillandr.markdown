@@ -5,6 +5,8 @@ featured: true
 layout: post
 ---
 
+&rarr; [Slidepack (PDF): Drill and R](https://github.com/bwv988/apache_drill_and_r/raw/master/apache_drill.pdf).
+
 Over the last decade, the [R](http://www.r-project.org/) programming language has gained a lot of traction outside of its core user base which mainly emerged from academia and quantitative research in the private sector.
 
 The **RedMonk Programming Language survey** -- a survey which aims at analyzing the use of various programming languages by looking at their respective popularity on **GitHub** and **Stackoverflow** -- has recently ranked R in the top quantile in terms of user popularity (see January 2015 [RedMonk ranking](https://redmonk.com/sogrady/2015/01/14/language-rankings-1-15/)).
@@ -21,5 +23,3 @@ Find the code here:
 
 * [GitHub repo](https://github.com/bwv988/apache_drill_and_r)
 * `git clone https://github.com/bwv988/apache_drill_and_r.git`
-
-There are also a few slides which document the findings: [Drill and R slides](https://github.com/bwv988/apache_drill_and_r/raw/master/apache_drill.pdf).
