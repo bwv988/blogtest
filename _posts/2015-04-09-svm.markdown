@@ -1,0 +1,12 @@
+---
+title: Support Vector Machines vs. Random Forests
+categories: [bigdata, r]
+layout: post
+---
+
+**Support Vector Machines**, often when used in conjunction with the so-called "Kernel Trick", are among the most powerful off-the shelf machine learning algorithms for supervised learning. That is, in cases where a classification model is sought for a desired outcome, and this model can be build based on training data which contains the expected outcome for each data row.
+
+The below report is a comparative analysis on the predictive performance of Support Vector Machines using a range of different _kernels_ vs. the Random Forest algorithm.
+
+* [Analysis PDF file](https://github.com/bwv988/data_analyses/raw/master/svm/svm_classification.pdf)
+* [GitHub repo](https://github.com/bwv988/data_analyses/tree/master/svm)

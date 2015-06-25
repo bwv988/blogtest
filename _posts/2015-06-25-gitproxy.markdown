@@ -1,0 +1,12 @@
+---
+title: Overriding proxy settings for Git
+categories: [git, linux]
+layout: post
+---
+
+When working with multiple Git repositories, I sometimes find myself having to override my current HTTP proxy setting (e.g. a corporate proxy) when pushing modifications to a public GitHub project. But doing so is actually really straight-forward.
+
+Simply execute the following inside the public repository you're intending to push:
+{% highlight bash %}
+    git config --add remote.origin.proxy ""
+{% endhighlight %}
