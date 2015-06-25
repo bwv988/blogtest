@@ -92,6 +92,20 @@ $on-laptop:        800px;
   margin-bottom: 50px;
 }
 
+.posts {
+    padding-top: 20px;
+}
+
+
+.featured {
+  padding-bottom: 70px;
+  border-bottom: 1px solid $green-color-light;
+}
+
+.normal_post h2 {
+    padding-top: 15em;
+}
+
 ul.posts {
   list-style-type: none;
 }

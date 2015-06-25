@@ -3,11 +3,10 @@ layout: default
 ---
 
 <div id="home">
-
-    <h1 id="intro" class="featured_post">Featured post</h1>
+     <div class="featured">
+          <h1 id="intro" class="featured_post">Featured post</h1>
       {% for post in site.posts %}
       {% if post.featured == true %}
-          <div class="post">
             <h2><a href="{{post.url}}">{{post.title}}</a></h2>
             <span class="date">{{ post.date | date:"%B %d, %Y" }} &rarr; </span>
             {{ post.content | strip_html | strip_newlines | truncatewords: 50}}
@@ -18,13 +17,15 @@ layout: default
             <div class="col_right">
               <a class="footer_tools" href="{{ post.url }}#disqus_thread">View Comments</a> <br />
            </div>
-          </div>
       {% endif %}
       {% endfor %}
+      </div>
 
-    <h2>Most recent posts</h2>
-      {% for post in site.posts limit:3 %}
-      <div class="post">
+
+      <div class="posts">
+        <h2>Most recent posts</h2>
+        {% for post in site.posts limit:3 %}
+        <div class="post">
         <h3><a href="{{post.url}}">{{post.title}}</a></h3>
         <span class="date">{{ post.date | date:"%B %d, %Y" }}  &rarr; </span>
         {{ post.content | strip_html | strip_newlines | truncatewords: 50}}
@@ -34,9 +35,11 @@ layout: default
         </div>
         <div class="col_right">
           <a class="footer_tools" href="{{ post.url }}#disqus_thread">View Comments</a> <br />
-       </div>
+        </div>
+        </div>
+       {% endfor %}
       </div>
-      {% endfor %}
+
 
   <div id="related">
     <div class="col_left">
