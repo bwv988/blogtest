@@ -1,12 +1,18 @@
 ---
-title: Downloading an F4F Media Stream
+title: Downloading an F4F Media Stream with some help from Koding.com
 categories: [linux]
 layout: post
 ---
 
 ## Introduction
 
-F4F is a file format used by _Adobe Media Server_ to deliver FLV videos in small chunks over the internet. Thus, videos cannot be downloaded directly; instead the chunks need to be downloaded separately and re-assembled after all chunks were retrieved.
+Recently I was preparing for a flight the following day and wanted to download a lecture video for a university course I am doing at the moment, so that I would be able to watch the lecture while airborne.
+
+But this turned out to be much trickier than I had anticipated!
+
+I quickly had to come to terms with the fact that none of my go-to streaming downloaders was able to help me, so I had to quickly research an alternative.
+
+After some further digging, it turned out the streaming platform the university runs is based on _F4F fragmented streaming_. F4F is a file format used by _Adobe Media Server_ to essentially deliver an FLV video in small chunks over the internet. As a consequence, videos cannot be downloaded directly; instead all the chunks need to be downloaded individually and re-assembled after all chunks were fully retrieved.
 
 Luckily, this came up in a in a post on Slashdot not too long ago (see [Slashdot post](http://stackoverflow.com/questions/25425956/any-good-programs-for-handeling-f4f-fragments-and-converting-them-into-a-complet) for more), and somebody has already written a neat little script to do exactly that job of re-assembling the stream fragments.
 
@@ -14,11 +20,13 @@ The script can be run fairly easily on a Linux environment and, with some extra,
 
 So the following is a step-by-step tutorial on applying the methodology outlined in the post. I have tried to be as concise as possible so as to make it easy to follow, even if you're not familiar with Linux.
 
-### Pre-requisites
+## Pre-requisites
 
-For this quick tutorial, I have chosen to demo the steps involved on a virtual machine running Linux which is hosted in __Koding__: [https://koding.com/](https://koding.com/).
+For this quick tutorial, I have decided to demo the steps involved on a virtual machine running Linux which is hosted in __Koding__: [https://koding.com/](https://koding.com/).
 
-Koding is a brilliant project which provides a web-based IDE, collaborative "social" coding, and full (yes, that means `root`) access to your very __own__ Ubunutu Linux installation in the cloud, and all that through the browser. This means you are totally free to play with the VM, create, install, play, delete whatever you wish (just don't do anything harmful, please :-)
+Why? Firstly because I love Koding and secondly because I can do whatver I like in my blog!
+
+But all joking aside, Koding is actually a brilliant project which provides a web-based IDE, collaborative ("social") coding, and full (yes, that means `root` for all the geeks out there) access to your very __own__ Ubunutu Linux installation in the cloud, and all that through the browser. This means you are totally free to play with the VM, create, install, play, delete whatever you wish (just don't do anything harmful, please :-)
 
 Oh yeah, it's also completely free of charge.
 
@@ -27,7 +35,7 @@ Isn't that pretty cool??
 Simply register for Koding and you're ready to move on to the first step. Or run the below steps on your Linux box, VM, etc.
 
 
-### Step 1. Download the script
+## 1. Download the script
 
 After you have familiarized yourself a bit with the Koding environment (they have some pretty good quickstart HOW-TOs), fire up your virtual machine instance. This should automatically open a terminal session, so in your browser you will see the command line as in the below picture:
 
@@ -43,7 +51,7 @@ The first thing I'm going to do is to create a new directory and use `git` to ch
 
 This will be our working directory, so we keep things nice and tidy. I like to keep things nice and tidy.
 
-### Step 2. Install missing dependencies
+## Step 2. Install missing dependencies
 
 Your terminal session should look more or less as in the picture below:
 
@@ -76,7 +84,7 @@ Now all is good and we can check that by issuing a quick
 
 which shows all of the script's command line options. Great. let's move on so.
 
-### 3. Locating the stream manifest
+## 3. Locating the stream manifest
 For every FLV video that is delivered through F4F chunks, there exists a so-called __stream manifest__ file that captures certain technical details of the stream, i.e. quality, length etc., but most importantly the number of chunks, in a machine-readable format.
 
 Our task is to locate the manifest file, because it's what the script requires as an input.
@@ -98,7 +106,7 @@ The link you have just copied could look like this:
 
 Your link will of course be totally different from the one I got.
 
-### 4. Downloading the video
+## 4. Downloading the video
 
 Now we can finally download the video, yay!
 
@@ -138,7 +146,7 @@ Magic!
 
 Of course you will have to replace that `e6` by whatever letters your file name starts with!
 
-### 5. Download the video from Koding
+## 5. Download the video from Koding
 
 All that is left to do now is to download the video file from Koding. That's the easiest part.
 
@@ -160,7 +168,7 @@ Now you can download the video by adding the filename `video1.flv` to the URL:
 
 Press enter and the download starts!
 
-### 6. Cleanup
+## 6. Cleanup
 
 As you know, I like to keep things nice and tidy, so finally let's remove all the downloaded stuff on your Koding VM, or you may eventually run out of disk space:
 
