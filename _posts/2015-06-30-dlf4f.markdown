@@ -6,27 +6,27 @@ layout: post
 
 ## Introduction
 
-Recently I was preparing for a flight the following day and wanted to download a lecture video for a university course I am doing at the moment, so that I would be able to watch the lecture while airborne.
+Recently I was packing for a flight I was due to take the following day and wanted to download a lecture video for a university module I am doing at the moment. My plan was to kill some time during flight and watch the lecture while cruising at 30.000 feet.
 
 But this turned out to be much trickier than I had anticipated!
 
-I quickly had to come to terms with the fact that none of my go-to streaming downloaders was able to help me, so I had to quickly research an alternative.
+After some initial attempts I gave up and quickly had to come to terms with the fact that none of my trusty downloading tools was able to help me this time. I put the search for and alternative  off for later and enjoyed a nice movie on the plane instead. Not so bad.
 
-After some further digging, it turned out the streaming platform the university runs is based on _F4F fragmented streaming_. F4F is a file format used by _Adobe Media Server_ to essentially deliver an FLV video in small chunks over the internet. As a consequence, videos cannot be downloaded directly; instead all the chunks need to be downloaded individually and re-assembled after all chunks were fully retrieved.
+Today I was finally able to do some further digging, and I found that the underlying streaming platform the university runs is based on _F4F fragmented streaming_. F4F is a file format served by _Adobe Media Server_. The core idea of this product is to cut up and deliver an FLV video in small chunks over the internet. As a consequence, videos cannot be downloaded directly -- instead all the chunks are downloaded individually by the browser and re-assembled on the client side, usually inside a Flash-based player plugin.
 
-Luckily, this came up in a in a post on Slashdot not too long ago (see [Slashdot post](http://stackoverflow.com/questions/25425956/any-good-programs-for-handeling-f4f-fragments-and-converting-them-into-a-complet) for more), and somebody has already written a neat little script to do exactly that job of re-assembling the stream fragments.
+Luckily, the issue of how to deal with F4Fs in terms of download    has come up in a post on Slashdot not too long ago (see the [Slashdot post](http://stackoverflow.com/questions/25425956/any-good-programs-for-handeling-f4f-fragments-and-converting-them-into-a-complet) for more), and somebody has already written a neat little script to do exactly that job of re-assembling the stream fragments.
 
-The script can be run fairly easily on a Linux environment and, with some extra, work possibly also on Windows or Mac OSX.
+The script can be run fairly easily on a Linux environment and, with some extra, work possibly also on Windows or Mac OSX, too.
 
 So the following is a step-by-step tutorial on applying the methodology outlined in the post. I have tried to be as concise as possible so as to make it easy to follow, even if you're not familiar with Linux.
 
-## Pre-requisites
+## Prerequisites
 
 For this quick tutorial, I have decided to demo the steps involved on a virtual machine running Linux which is hosted in __Koding__: [https://koding.com/](https://koding.com/).
 
 Why? Firstly because I love Koding and secondly because I can do whatver I like in my blog!
 
-But all joking aside, Koding is actually a brilliant project which provides a web-based IDE, collaborative ("social") coding, and full (yes, that means `root` for all the geeks out there) access to your very __own__ Ubunutu Linux installation in the cloud, and all that through the browser. This means you are totally free to play with the VM, create, install, play, delete whatever you wish (just don't do anything harmful, please :-)
+But all joking aside, Koding is actually a brilliant project which provides a web-based IDE, collaborative ("social") coding, and full (yes, that means `root` for all the geeks out there) access to your very __own__ Ubunutu Linux installation in the cloud, and all that through the browser. This means you are totally free to play with the VM, create, install, delete, do whatever you wish (just don't do anything harmful, please :-)
 
 Oh yeah, it's also completely free of charge.
 
@@ -41,7 +41,7 @@ After you have familiarized yourself a bit with the Koding environment (they hav
 
 ![Step 1](/images/f4fpost/step1.png)
 
-If you get this far, well done! ;-) Now you have access to the full power of _Ubuntu Linux_. Awesome.
+If you get this far, well done! ;-) Now you can harness the full power of _Ubuntu Linux_. Awesome.
 
 The first thing I'm going to do is to create a new directory and use `git` to check out the script's sources from _GitHub_:
 
@@ -49,15 +49,28 @@ The first thing I'm going to do is to create a new directory and use `git` to ch
     cd video_downloads
     git clone https://github.com/K-S-V/Scripts.git
 
-This will be our working directory, so we keep things nice and tidy. I like to keep things nice and tidy.
+At this stage I should probably mention that when write a
 
-## Step 2. Install missing dependencies
+    new paragraph in this funny teletype font
+
+this usually means: These are commands that should be typed and executed in your Linux terminal.
+
+So `video_downloads` will be our working directory, this way we keep things nice and tidy. I like to keep things nice and tidy.
+
+
+## 2. Install missing dependencies
 
 Your terminal session should look more or less as in the picture below:
 
 ![Step 2a](/images/f4fpost/step2a.png)
 
-Note that there is now a `Scripts` folder, and when you change to that folder using the Linux `cd` command, you will find a file called `AdobeHDS.php`. The file ending tells you that the script is written in PHP, and this is the script that's going to do all the hard work for us!
+Note that I have also run the command
+
+    ls -la
+
+to print a directory listing.
+
+Note furhter that there is now a `Scripts` folder, and when you change to that folder using the Linux `cd` command, you will find a file called `AdobeHDS.php`. The file ending tells you that the script is written in PHP, and this is the script that's going to do all the hard work for us!
 
     cd Scripts
 
@@ -93,7 +106,7 @@ So now we need to do the following:
 
 1. Open the web page containing the video you wish to download.
 2. Open the browser's developer console. Dont' worry, we are not going to break anything, I promise! :-D In Google Chrome this can be achieved either through the menu or by pressing `Ctrl+Shift+I` simultaneously.
-3. In the network tab of the developer console, locate for the manifest. You'll recognize it once you see it, because the response type is XML.
+3. In the network tab of the developer console, look for the manifest. You'll recognize it once you see it, because the response type is XML.
 4. Copy the link to this file by right-clicking on the name and selecting "Copy Link Address".
 
 Below picture shows an example of how this could look like, highlighting the relevant parts:
@@ -131,20 +144,16 @@ The download starts, a lot of files are being downloaded, and eventually we get 
     Finished
     ternaryrealm: ~/video_downloads $
 
-Cool. Now run the following command and it will locate the filename of the __complete video file__:
+Cool. Now run the following `ls` command and it will locate the filename of the __complete video file__:
 
     ls *.flv
     e6aaf925d6259bd139c6f53ba4af87dd_fbd5bb249733a6fae16ca0a309d676b5_Seg1-Frag.flv
 
-This filename looks a bit messy, thus I am going to rename it and move it into a different folder (the `Web` folder actually) so I will be able to download it from the Koding VM:
+This filename looks a bit messy, don't you agree? I am going to rename the file to `video1.flv` and move it into a different folder, the `Web` folder actually, so I will be able to download it from the Koding VM:
 
-    mv e6aaf925d6259bd139c6f53ba4af87dd_fbd5bb249733a6fae16ca0a309d676b5_Seg1-Frag.flv ~/Web/video1.flv
 
-By the way, don't bother typing that full name. Just type `e6` and press the `Tab` button on your keyboard and add the `.flv` extension.
+    mv e6aaf925d6259bd139c6f53ba4af87dd_fbd5bb249733a6fae16ca0a309d676b5_Seg1-Frag.flv ~/Web/video1.flv
 
-Magic!
-
-Of course you will have to replace that `e6` by whatever letters your file name starts with!
 
 ## 5. Download the video from Koding
 
@@ -170,11 +179,9 @@ Press enter and the download starts!
 
 ## 6. Cleanup
 
-As you know, I like to keep things nice and tidy, so finally let's remove all the downloaded stuff on your Koding VM, or you may eventually run out of disk space:
+As you now know, I like to keep things nice and tidy, so finally let's remove all the downloaded stuff on your Koding VM, or you may eventually run out of disk space:
 
-    ternaryrealm: ~/video_downloads $ rm e6*
-    ternaryrealm: ~/video_downloads $ rm ~/Web/video1.flv
-    ternaryrealm: ~/video_downloads $  
+    rm e6*
+    rm ~/Web/video1.flv
 
-
-That's it, enjoy!
+That's it folks, enjoy!
