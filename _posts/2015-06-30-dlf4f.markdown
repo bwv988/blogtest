@@ -14,7 +14,7 @@ After some initial attempts I gave up and quickly had to come to terms with the 
 
 Today I was finally able to do some further digging, and I found that the underlying streaming platform the university runs is based on _F4F fragmented streaming_. F4F is a file format served by _Adobe Media Server_. The core idea of this product is to cut up and deliver an FLV video in small chunks over the internet. As a consequence, videos cannot be downloaded directly -- instead all the chunks are downloaded individually by the browser and re-assembled on the client side, usually inside a Flash-based player plugin.
 
-Luckily, the issue of how to deal with F4Fs in terms of download    has come up in a post on Slashdot not too long ago (see the [Slashdot post](http://stackoverflow.com/questions/25425956/any-good-programs-for-handeling-f4f-fragments-and-converting-them-into-a-complet) for more), and somebody has already written a neat little script to do exactly that job of re-assembling the stream fragments.
+Luckily, the issue of how to deal with F4Fs in terms of download has come up in a post on Slashdot not too long ago (see the [Slashdot post](http://stackoverflow.com/questions/25425956/any-good-programs-for-handeling-f4f-fragments-and-converting-them-into-a-complet) for more), and somebody has already written a neat little script to do exactly that job of re-assembling the stream fragments.
 
 The script can be run fairly easily on a Linux environment and, with some extra, work possibly also on Windows or Mac OSX, too.
 
@@ -26,13 +26,13 @@ For this quick tutorial, I have decided to demo the steps involved on a virtual 
 
 Why? Firstly because I love Koding and secondly because I can do whatver I like in my blog!
 
-But all joking aside, Koding is actually a brilliant project which provides a web-based IDE, collaborative ("social") coding, and full (yes, that means `root` for all the geeks out there) access to your very __own__ Ubunutu Linux installation in the cloud, and all that through the browser. This means you are totally free to play with the VM, create, install, delete, do whatever you wish (just don't do anything harmful, please :-)
+But all joking aside, Koding is actually a brilliant project which provides a web-based IDE, collaborative "social" coding, and full (yes, that means `root` for all the geeks out there) access to your very __own__ Ubunutu Linux installation in the cloud, and all that through the browser. This means you are totally free to play with the VM, create, install, delete, do whatever you wish (just don't do anything harmful, please :-)
 
 Oh yeah, it's also completely free of charge.
 
 Isn't that pretty cool??
 
-Simply register for Koding and you're ready to move on to the first step. Or run the below steps on your Linux box, VM, etc.
+Simply register for Koding and you're ready to move on to the first step. Or run the below steps on your local Linux box, VM, etc.
 
 
 ## 1. Download the script
@@ -70,7 +70,7 @@ Note that I have also run the command
 
 to print a directory listing.
 
-Note furhter that there is now a `Scripts` folder, and when you change to that folder using the Linux `cd` command, you will find a file called `AdobeHDS.php`. The file ending tells you that the script is written in PHP, and this is the script that's going to do all the hard work for us!
+Note further that there is now a `Scripts` folder, and when you change to that folder using the Linux `cd` command, you will find a file called `AdobeHDS.php`. The file ending tells you that the script is written in PHP, and this is the script that's going to do all the hard work for us!
 
     cd Scripts
 
@@ -104,18 +104,14 @@ Our task is to locate the manifest file, because it's what the script requires a
 
 So now we need to do the following:
 
-1. Open the web page containing the video you wish to download.
+1. Open the web page containing the video you wish to download. Then start the video. This is important.
 2. Open the browser's developer console. Dont' worry, we are not going to break anything, I promise! :-D In Google Chrome this can be achieved either through the menu or by pressing `Ctrl+Shift+I` simultaneously.
-3. In the network tab of the developer console, look for the manifest. You'll recognize it once you see it, because the response type is XML.
+3. In the network tab of the developer console you will see how video chunks are constantly downloaded as the video progresses. But you need to look for the manifest. You'll recognize it once you see it, because the response type is XML and it's downloaded at the very beginning.
 4. Copy the link to this file by right-clicking on the name and selecting "Copy Link Address".
 
 Below picture shows an example of how this could look like, highlighting the relevant parts:
 
 ![Step 3a](/images/f4fpost/step3a.png)
-
-The link you have just copied could look like this:
-
-    https://media.heanet.ie/vod/8dc0b92c3a613889748f7dc3b4f0eab6/8dc0b92c3a613889748f7dc3b4f0eab6.f4m?SUID=9fc4c10ac54c43b144bbb6082bc92f0c
 
 Your link will of course be totally different from the one I got.
 
@@ -126,11 +122,11 @@ Now we can finally download the video, yay!
 I am moving out of the current directory and then I call the script with the manifest file as an input parameter:
 
     cd ..
-    php Scripts/AdobeHDS.php --manifest https://media.heanet.ie/vod/8dc0b92c3a613889748f7dc3b4f0eab6/8dc0b92c3a613889748f7dc3b4f0eab6.f4m?SUID=195127d33c98c1d9d32842895655b92d
+    php Scripts/AdobeHDS.php --manifest https://someserver.com/vod/8dc0b92c3a613889748f7dc3b4f0eab6/8dc0b92c3a613889748f7dc3b4f0eab6.f4m?SUID=195127d33c98c1d9d32842895655b92d
 
 The download starts, a lot of files are being downloaded, and eventually we get the below output:
 
-    ternaryrealm: ~/video_downloads $ php Scripts/AdobeHDS.php --manifest https://media.heanet.ie/vod/8dc0b92c3a613889748f7dc3b4f0eab6/8dc0b92c3a613889748f7dc3b4f0eab6.f4m?SUID=195127d33c98c1d9d32842895655b92d
+    ternaryrealm: ~/video_downloads $ php Scripts/AdobeHDS.php --manifest https://someserver.com/vod/8dc0b92c3a613889748f7dc3b4f0eab6/8dc0b92c3a613889748f7dc3b4f0eab6.f4m?SUID=195127d33c98c1d9d32842895655b92d
 
                         KSV Adobe HDS Downloader
 
