@@ -1,7 +1,9 @@
 GEM
   specs:
+    jekyll-gist (1.2.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  jekyll-gist

@@ -4,19 +4,25 @@ categories: [R, XML]
 layout: post
 ---
 
-Recently I got interested in doing some basic exploratory analysis on a relatively large XML file I was dealing with in work.
+A question from a colleague came up in work a short while ago which sparked my interest in doing some basic exploratory analysis on a relatively "large" (> 1Mb) XML file.
 
-XML processing tasks can be accomplished in R with relative ease thanks to powerful packages like the `XML` package. This package supports all the well-known operations on XML data, e.g. node traversal, node creation, extraction of contents etc.
+XML processing tasks can be accomplished in R with relative ease these days thanks to a number of powerful packages. One of the most mature and feature-rich ones is the `XML` package. It supports all the well-known atomic operations on XML data, e.g. node traversal, node creation, extraction of contents etc, but also some common R idioms that make it straightforward to write the kind of compact yet readable code to which R owes much of its appeal.
 
-As an example, let's look at the _Mondial_ geographic database from the CIA World Factbook, which can be obtained in XML format from here:
+The following article shows how it works.
 
-[http://www.cs.washington.edu/research/xmldatasets/www/repository.html#mondial]([http://www.cs.washington.edu/research/xmldatasets/www/repository.html#mondial)
+## The task
+As an example, let's look at the _Mondial_ geographic database from the CIA World Factbook:
 
-I've downloaded the database and stored it in a local directory `~/Temp`.
+[http://www.cs.washington.edu/research/xmldatasets/www/repository.html#mondial](http://www.cs.washington.edu/research/xmldatasets/www/repository.html#mondial)
 
-Suppose we had the task of analyzing the empirical distributions of the first letters for the city names contained in the _Mondial_ database.
+For convenience, I have downloaded the file and stored it in a local directory `~/Temp`.
 
-The first thing I do is load the `XML` package, use the `xmlTreeParse` command to load the XML file into R, and obtain a reference to the top-level (or root) node:
+Suppose we had the task of visualizing the empirical distribution of the first letters for all the city names contained in the _Mondial_ database.
+
+## Loading the XML
+After installing the `XML` package via the usual `install.packages` command, I can proceed to load it into R's namespace.
+
+The next steps are running `xmlTreeParse` which loads the XML file into R, and obtaining a reference to the root node with the `xmlRoot` function:
 
 {% highlight R %}
 library(XML)
@@ -24,12 +30,34 @@ xml <- xmlTreeParse("~/Temp/mondial-3.0.xml", useInternalNodes = TRUE)
 root <- xmlRoot(xml)
 {% endhighlight %}
 
-When parsing the XML file, I have instructed R to create _internal_ nodes by supplying the option `useInternalNodes = TRUE`. Internal nodes are stored in R as C language-level data structures.
+For parsing the XML file, I have instructed R to create _internal_ nodes by supplying the option `useInternalNodes = TRUE`. Internal nodes are stored as C language-level data structures.
 
-This improves efficiency, however makes things slightly harder for debugging, because e.g. the node contents cannot simply be printed to the R console.
+This improves efficiency, however it comes at the cost of making things slightly harder for debugging, because e.g. the node contents cannot simply be printed to the R console.
 
-The reference to the root element
+## Data extraction and processing
+The reference to the root element then serves as the starting point for further operations, specifically extracting the names of each city for all countries contained in the file.
 
-The full script can be downloaded from the following gist:
+Navigating to the city name nodes in XML itself is trivial, because -- in the absence of further constraints -- we can use a very simple _XPath_ expression to retrieve all nodes at once.
+
+If we were approaching our task in another programming language, we would now have to write some sort of ugly loop to iterate over all the city nodes to extract the actual names as character strings.
+
+However the `XML` package provides a much more **idiomatic** way of obtaining the XML value. A loop can be avoided by using the `xpathApply` function, a function that extends R's proven `apply` paradigm to XML data structures. With this method, we can compile the list of cities in a single R command:
+
+{% highlight R %}
+city.names <- unlist(xpathApply(root, "//country/city/name", xmlValue, trim = TRUE))
+{% endhighlight %}
+
+Finally we do some post-processing in R and create a nice plot:
+
+![Empirical Distribution of First Letters](/images/rxmlpost/first_letters.png)
+
+It turns out that the letter "S" is the most frequent first letter for all the city names in the database, while "X", unsurprisingly, is totally absent as a first letter.
+
+The full script can be copied from the below gist:
 
 {% gist bwv988/d6fb77ae2ac3a8c146ba %}
+
+## References
+
+* [XML package in R](https://cran.r-project.org/web/packages/XML/index.html)
+* [XPath](http://www.w3.org/TR/xpath/)
