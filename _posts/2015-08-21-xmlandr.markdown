@@ -1,6 +1,7 @@
 ---
 title: Parsing XML in R
 categories: [R, XML]
+featured: true
 layout: post
 ---
 
