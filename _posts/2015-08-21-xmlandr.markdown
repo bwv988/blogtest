@@ -1,0 +1,35 @@
+---
+title: Parsing XML in R
+categories: [R, XML]
+layout: post
+---
+
+Recently I got interested in doing some basic exploratory analysis on a relatively large XML file I was dealing with in work.
+
+XML processing tasks can be accomplished in R with relative ease thanks to powerful packages like the `XML` package. This package supports all the well-known operations on XML data, e.g. node traversal, node creation, extraction of contents etc.
+
+As an example, let's look at the _Mondial_ geographic database from the CIA World Factbook, which can be obtained in XML format from here:
+
+[http://www.cs.washington.edu/research/xmldatasets/www/repository.html#mondial]([http://www.cs.washington.edu/research/xmldatasets/www/repository.html#mondial)
+
+I've downloaded the database and stored it in a local directory `~/Temp`.
+
+Suppose we had the task of analyzing the empirical distributions of the first letters for the city names contained in the _Mondial_ database.
+
+The first thing I do is load the `XML` package, use the `xmlTreeParse` command to load the XML file into R, and obtain a reference to the top-level (or root) node:
+
+{% highlight R %}
+library(XML)
+xml <- xmlTreeParse("~/Temp/mondial-3.0.xml", useInternalNodes = TRUE)
+root <- xmlRoot(xml)
+{% endhighlight %}
+
+When parsing the XML file, I have instructed R to create _internal_ nodes by supplying the option `useInternalNodes = TRUE`. Internal nodes are stored in R as C language-level data structures.
+
+This improves efficiency, however makes things slightly harder for debugging, because e.g. the node contents cannot simply be printed to the R console.
+
+The reference to the root element
+
+The full script can be downloaded from the following gist:
+
+{% gist bwv988/d6fb77ae2ac3a8c146ba %}
