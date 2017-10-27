@@ -1,7 +1,8 @@
 # Site settings
 name: Ralph Schlosser
 description: "Data + Science + Art"
-url: ""
+url: "http://www.warpbreaks.io"
+title "warpbreaks.io"
 
 
 # Delete the lines you don't need
